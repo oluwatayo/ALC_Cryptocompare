@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Cryptocompare</string>
+    <string name="activity_converter">Converter</string>
+    <string name="hint">Enter Value in Base Currency</string>
+    <string name="button_text">GO</string>
+    <string name="resultPlaceHolder">0.00000000</string>
+    <string name="text">Conversion From Base To Btc</string>
+    <string name="empty">No Rates Found</string>
+    <string name="noInternet">No Internet Connection</string>
+    <string name="base">Base Currency</string>
+    <string name="btc">1 Bitcoin</string>
+</resources>

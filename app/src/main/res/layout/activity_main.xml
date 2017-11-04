@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v4.widget.SwipeRefreshLayout
+    android:background="@color/cardview_dark_background"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/refresh"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    >
+    <RelativeLayout android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <LinearLayout
+            android:padding="16dp"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:paddingLeft="8dp"
+                android:textColor="@color/colorText"
+                android:layout_height="wrap_content"
+                android:text="@string/base"
+                android:gravity="center_horizontal"
+                android:textSize="25sp"/>
+            <TextView
+                android:textSize="25sp"
+                android:textColor="@color/colorText"
+                android:paddingLeft="48dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btc" />
+
+        </LinearLayout>
+        <ListView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/list"
+            android:layout_marginTop="70dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@null"
+            android:dividerHeight="0dp"/>
+        <TextView
+            android:id="@+id/emptyCurrency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="No Rates Found"
+            android:layout_centerInParent="true"
+            android:textSize="24sp"/>
+        <ProgressBar
+            android:id="@+id/loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            style="@style/Widget.AppCompat.ProgressBar"
+            />
+    </RelativeLayout>
+
+</android.support.v4.widget.SwipeRefreshLayout>
+

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/cardview_dark_background"
+    android:padding="16dp"
+    tools:context=".Converter">
+
+    <TextView
+        android:id="@+id/convertText"
+        android:text="@string/text"
+        android:textColor="@color/colorText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:paddingBottom="16dp"
+        android:paddingTop="16dp"
+        android:textAppearance="?android:textAppearanceLarge" />
+
+
+    <TextView
+        android:id="@+id/result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/converted_circle"
+        android:gravity="center"
+        android:text="@string/resultPlaceHolder"
+        android:textColor="@android:color/white"
+        android:textSize="20sp" />
+    <android.support.v7.widget.CardView
+        android:layout_marginTop="16dp"
+        app:cardBackgroundColor="@color/cardview_dark_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical">
+            <EditText
+                android:id="@+id/userInput"
+                android:inputType="number"
+                android:hint="@string/hint"
+                android:textColor="@color/colorAccent"
+                android:textColorHint="@color/colorAccent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                />
+            <Button
+                android:id="@+id/buttonConvert"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorText"
+                android:background="@color/colorButtonBackground"
+                android:text="@string/button_text"/>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+
+</LinearLayout>

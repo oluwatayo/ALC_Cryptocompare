@@ -7,10 +7,12 @@ package com.example.root.crptocompare;
 public class Currency {
     private String mBase;
     private String mCrypt;
+    private String mEth;
 
-    public Currency(String mBase, String mCrypt) {
+    public Currency(String mBase, String mCrypt, String mEth) {
         this.mBase = mBase;
         this.mCrypt = mCrypt;
+        this.mEth = mEth;
     }
 
     public String getmBase() {
@@ -19,5 +21,9 @@ public class Currency {
 
     public String getmCrypt() {
         return mCrypt;
+    }
+
+    public String getmEth() {
+        return mEth;
     }
 }

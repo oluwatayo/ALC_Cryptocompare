@@ -9,4 +9,8 @@
     <string name="noInternet">No Internet Connection</string>
     <string name="base">Base Currency</string>
     <string name="btc">1 Bitcoin</string>
+    <string name="eth">Ethereum</string>
+    <string name="ethText">ETH</string>
+    <string name="btcText">BTC</string>
+    <string name="refr">Refresh</string>
 </resources>

@@ -110,9 +110,12 @@ public class Networking {
         ArrayList<Currency> arrayList = new ArrayList<>();
         try {
             JSONObject jsonObject = new JSONObject(json);
+            JSONObject btc = jsonObject.getJSONObject("BTC");
+            JSONObject eth = jsonObject.getJSONObject("ETH");
             for (String anArr : arr) {
-                String curr = jsonObject.getString(anArr);
-                arrayList.add(new Currency(anArr, curr));
+                String bitCurrency = btc.getString(anArr);
+                String ethCurrency = eth.getString(anArr);
+                arrayList.add(new Currency(anArr, bitCurrency, ethCurrency));
             }
             Log.i(LOG_TAG, "TEST:PArse success ");
         } catch (JSONException e) {

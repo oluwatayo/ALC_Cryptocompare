@@ -7,4 +7,5 @@
     <color name="colorText">#FFF</color>
     <color name="colorCircleBackground">#64b5f6</color>
     <color name="colorButtonBackground">#64b5f6</color>
+    <color name="ethBack">#8442c761</color>
 </resources>

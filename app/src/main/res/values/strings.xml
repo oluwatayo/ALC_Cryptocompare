@@ -13,4 +13,14 @@
     <string name="ethText">ETH</string>
     <string name="btcText">BTC</string>
     <string name="refr">Refresh</string>
+    <string name="prefrence">Preferences</string>
+    <string name="note">* Kindly Note That All Currencies are in the form NGN, USD, EUR etc......</string>
+    <string name="buttonPref">ADD</string>+
+    <string name="prefTitle">Add More Currencies</string>
+    <string name="addCur">Type in Your Desired Currency</string>
+    <string name="settings_menu_item">Preferences</string>
+    <string name="splashImage">Splash Image</string>
+    <string name="title_activity_splash_screen">SplashScreen</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>

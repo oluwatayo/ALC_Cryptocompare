@@ -31,6 +31,8 @@ public class Converter extends AppCompatActivity {
         textView.setText(name);
         Button button = (Button) findViewById(R.id.buttonConvert);
         final EditText editText = (EditText) findViewById(R.id.userInput);
+        editText.setHint("Enter Value to be Converted in "+getIntent().getExtras().getString("name"));
+
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,10 +49,8 @@ public class Converter extends AppCompatActivity {
                     bth = Float.parseFloat(b) / bth;
                     eth = Float.parseFloat(b) / eth;
                     DecimalFormat decimalFormat = new DecimalFormat("0.0000000");
-                    String result = decimalFormat.format(bth);
-                    String result1 = decimalFormat.format(eth);
-                    textView.setText(result);
-                    textView1.setText(result1);
+                    textView.setText(decimalFormat.format(bth));
+                    textView1.setText(decimalFormat.format(eth));
                 }
 
             }

@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3f92b5</color>
-    <color name="colorPrimaryDark">#d8308b9f</color>
+    <color name="colorPrimary">#26a69a</color>
+    <color name="colorPrimaryDark">#00897b</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorCardBackground">#437f8e</color>
     <color name="colorText">#FFF</color>
     <color name="colorCircleBackground">#64b5f6</color>
     <color name="colorButtonBackground">#64b5f6</color>
     <color name="ethBack">#8442c761</color>
+
+    <color name="black_overlay">#66000000</color>
 </resources>

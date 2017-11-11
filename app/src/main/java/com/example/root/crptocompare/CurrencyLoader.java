@@ -16,7 +16,6 @@ public class CurrencyLoader extends AsyncTaskLoader<ArrayList<Currency>> {
     public CurrencyLoader(Context context, String str) {
         super(context);
         this.string = str;
-
     }
 
     @Override

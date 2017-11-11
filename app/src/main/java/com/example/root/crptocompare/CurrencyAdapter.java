@@ -33,6 +33,7 @@ public class CurrencyAdapter extends ArrayAdapter<Currency> {
         }
         Currency currency = getItem(position);
         TextView base = (TextView) currencyView.findViewById(R.id.baseCurrency);
+        assert currency != null;
         base.setText(currency.getmBase());
         TextView crypto = (TextView) currencyView.findViewById(R.id.crypto);
         crypto.setText(currency.getmCrypt());

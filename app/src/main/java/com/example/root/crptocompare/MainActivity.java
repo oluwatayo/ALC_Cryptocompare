@@ -4,12 +4,15 @@ import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
@@ -23,7 +26,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<ArrayList<Currency>> {
     //String that holds the cryptocompare url
-    private final String url = "https://min-api.cryptocompare.com/data/pricemulti?fsyms=ETH,BTC&tsyms=NGN,USD,AUD,GBP,JPY,CHF,AFN,DZD,AOA,ARS,BRL,XOF,CNY,SVC,ETB,HUF,NAD,NZD,NOK,PHP";
+    private String url = "https://min-api.cryptocompare.com/data/pricemulti?fsyms=ETH,BTC&tsyms=";
     private CurrencyAdapter currencyAdapter;
     private SwipeRefreshLayout refreshLayout;
     private Button button;
@@ -107,13 +110,19 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public Loader<ArrayList<Currency>> onCreateLoader(int i, Bundle bundle) {
-        Log.i(LOG_TAG, "TEST: Calling onCreateLoader");
+        //Log.i(LOG_TAG, "TEST: Calling onCreateLoader");
+        SharedPreferences sharedPreferences = getSharedPreferences("PREF", 0);
+        if (sharedPreferences.contains("currencies")){
+           url += sharedPreferences.getString("currencies", "");
+        }else {
+            url += "NGN,USD,AUD,GBP,JPY";
+        }
         return new CurrencyLoader(MainActivity.this, url);
     }
 
     @Override
     public void onLoadFinished(Loader<ArrayList<Currency>> loader, ArrayList<Currency> currencies) {
-        Log.i(LOG_TAG, "TEST: Calling OnLoadFinished");
+        //Log.i(LOG_TAG, "TEST: Calling OnLoadFinished");
         progressBar = (ProgressBar) findViewById(R.id.loading);
         button = (Button) findViewById(R.id.refreshButton);
         progressBar.setVisibility(View.GONE);
@@ -148,7 +157,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 activeNetwork.isConnectedOrConnecting();
 
         LoaderManager loaderManager = getLoaderManager();
-        Log.i(LOG_TAG, "TEST: calling initloader");
+        //Log.i(LOG_TAG, "TEST: calling initloader");
         if (isConnected) {
             if (refreshLayout.isRefreshing()) {
                 refreshLayout.setRefreshing(false);
@@ -165,5 +174,21 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             }
         }
 
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if(id == R.id.action_settings){
+            Intent preferenceIntent = new Intent(this, PrefrenceActivity.class);
+            startActivity(preferenceIntent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

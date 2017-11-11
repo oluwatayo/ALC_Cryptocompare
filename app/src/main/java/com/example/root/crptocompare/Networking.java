@@ -1,5 +1,7 @@
 package com.example.root.crptocompare;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -20,29 +22,48 @@ import java.util.ArrayList;
  * Created by root on 11/4/17.
  */
 
-public class Networking {
+/**
+ * Helper methods related to requesting and receiving currency rates data from cryptocompare api.
+ */
 
-    private Networking() {
-    }
+public class Networking {
 
     public static final String LOG_TAG = Networking.class.getSimpleName();
 
-    public static ArrayList<Currency> fetchCurrency(String str){
+    /**
+     * Create a private constructor because no one should ever create a {@link Networking} object.
+     * This class is only meant to hold static variables and methods, which can be accessed
+     * directly from the class name Networking (and an object instance of Networking is not needed).
+     */
+    private Networking() {
+    }
+
+    /**
+     * @param str The link in a string format
+     * Return a list of {@link Currency} objects that has been built up from
+     * parsing a JSON response.
+     */
+    public static ArrayList<Currency> fetchCurrency(String str) {
 
         String jsonResponse = null;
-
+        // create a urlobject from the url string
         URL url = createUrl(str);
 
         try {
             jsonResponse = makeUrlConnection(url);
         } catch (IOException e) {
-            Log.e(LOG_TAG, "IOexeption",e);
+            //Log.e(LOG_TAG, "IOexeption", e);
         }
 
-        return parseJson(jsonResponse);
+        return parseJson(jsonResponse, str);
     }
 
-    public static String makeUrlConnection(URL url)throws IOException{
+    /**
+     * @param url the url object
+     *  Makes an httpConnection to the url and returns a JsonString
+     * */
+
+    public static String makeUrlConnection(URL url) throws IOException {
         InputStream inputStream = null;
         String jsonResponse = null;
 
@@ -56,38 +77,45 @@ public class Networking {
             urlConnection.setConnectTimeout(15000);
             urlConnection.connect();
 
-            if(urlConnection.getResponseCode() == 200){
-                Log.i(LOG_TAG, "TEST: 200 Received");
+            if (urlConnection.getResponseCode() == 200) {
+                //Log.i(LOG_TAG, "TEST: 200 Received");
                 inputStream = urlConnection.getInputStream();
                 jsonResponse = readFromStream(inputStream);
-            }else {
-                Log.i(LOG_TAG, "TEST Response: " + urlConnection.getResponseCode());
+            } else {
+                //Log.i(LOG_TAG, "TEST Response: " + urlConnection.getResponseCode());
             }
         } catch (IOException e) {
-            Log.i(LOG_TAG, "TEST",e);
+            //Log.i(LOG_TAG, "TEST", e);
             e.printStackTrace();
-        }finally {
-            if(inputStream !=null){
+        } finally {
+            if (inputStream != null) {
                 inputStream.close();
             }
-            if(urlConnection != null){
-            urlConnection.disconnect();
+            if (urlConnection != null) {
+                urlConnection.disconnect();
             }
         }
 
         return jsonResponse;
     }
 
-    public static URL createUrl(String url){
+    /**
+     * @param url string from which the url object is created
+     * */
+    public static URL createUrl(String url) {
         URL url1 = null;
         try {
-             url1 = new URL(url);
+            url1 = new URL(url);
         } catch (MalformedURLException e) {
-            Log.i(LOG_TAG, "MalformedUrl",e);
+            //Log.i(LOG_TAG, "MalformedUrl", e);
         }
 
         return url1;
     }
+    /**
+     * Helper Method to convert the bytes/chunks of data received into a valid string
+     * */
+
     private static String readFromStream(InputStream inputStream) throws IOException {
         StringBuilder output = new StringBuilder();
         if (inputStream != null) {
@@ -102,9 +130,14 @@ public class Networking {
         return output.toString();
     }
 
-    public static ArrayList<Currency> parseJson(String json){
-        String[] arr = new String[]{"NGN","USD","AUD","GBP","JPY","CHF","AFN","DZD","AOA","ARS","BRL","XOF","CNY","SVC","ETB","HUF","NAD","NZD","NOK","PHP"};
-        if(TextUtils.isEmpty(json)){
+    /**
+     * @param url The url string is used here to get the currencies requested from the cryptocompare api
+     *            and is split into an array and used to get the keys in the jsonObject
+     * */
+    public static ArrayList<Currency> parseJson(String json, String url) {
+        String a = url.substring(url.indexOf("NGN"), url.length());
+        String[] arr = a.split(",");
+        if (TextUtils.isEmpty(json)) {
             return null;
         }
         ArrayList<Currency> arrayList = new ArrayList<>();
@@ -113,13 +146,15 @@ public class Networking {
             JSONObject btc = jsonObject.getJSONObject("BTC");
             JSONObject eth = jsonObject.getJSONObject("ETH");
             for (String anArr : arr) {
-                String bitCurrency = btc.getString(anArr);
-                String ethCurrency = eth.getString(anArr);
-                arrayList.add(new Currency(anArr, bitCurrency, ethCurrency));
+                String bitCurrency = btc.optString(anArr);
+                String ethCurrency = eth.optString(anArr);
+                if(bitCurrency != null && !TextUtils.isEmpty(bitCurrency)){
+                    arrayList.add(new Currency(anArr, bitCurrency, ethCurrency));
+                }
             }
-            Log.i(LOG_TAG, "TEST:PArse success ");
+            //Log.i(LOG_TAG, "TEST:PArse success ");
         } catch (JSONException e) {
-            Log.i(LOG_TAG, "TEST: Error Parsing JSON");
+            //Log.i(LOG_TAG, "TEST: Error Parsing JSON");
         }
 
         return arrayList;

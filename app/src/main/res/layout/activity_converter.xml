@@ -85,7 +85,6 @@
             <EditText
                 android:id="@+id/userInput"
                 android:inputType="number"
-                android:hint="@string/hint"
                 android:textColor="@color/colorAccent"
                 android:textColorHint="@color/colorAccent"
                 android:layout_width="wrap_content"
